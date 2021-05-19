@@ -5,13 +5,13 @@
 #include "iec16022ecc200.h"
 
 typedef struct semacode_t {
-  int width;
-  int height;
-  int raw_encoded_length;
-  int symbol_capacity;
-  int ecc_bytes;
-  char *encoding;
-  char *data;
+    int width;
+    int height;
+    int raw_encoded_length;
+    int symbol_capacity;
+    int ecc_bytes;
+    char *encoding;
+    char *data;
 } semacode_t;
 
 #ifndef RB_STRING_VALUE
@@ -23,7 +23,8 @@ typedef struct semacode_t {
 #endif
 
 #ifndef StringValueLen
-#define StringValueLen(s) RSTRING_LEN(RB_STRING_VALUE(s))
+#define StringValueLen(s) RSTRING_LEN((TYPE(message) == T_STRING ? (message) : (*(volatile VALUE *) &(message) = rb_str_to_str(message))))
 #endif
 
 #endif
+
